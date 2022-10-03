@@ -1,0 +1,6 @@
+{
+    "dataworkspace.excludedProjects": [
+        "SQL1/SQL1.sqlproj"
+    ],
+    "C_Cpp.errorSquiggles": "Enabled"
+}
