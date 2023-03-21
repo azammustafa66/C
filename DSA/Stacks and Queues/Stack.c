@@ -1,65 +1,87 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<conio.h>
+#define max 5
 
-#define size 100
+int stack[max], top = -1;
 
-int stack[size], top = -1, item, capacity = 1;
+int isFull() {
+    if (top == max - 1) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
+int isEmpty() {
+    if (top == -1) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
 void push() {
-    printf("Enter an item to insert: ");
-    scanf("%d", &item);
-    stack[++top] = item;
-}
+    printf("Enter a value to push: ");
+    int item;
+    scanf("%d",&item);
 
-void pop() {
-    if (top == -1) {
-        printf("Stack underflow\n");
-        return;
-    }
-    item = stack[top--];
-    printf("Item deleted is %d\n", item);
-}
-
-
-void display() {
-    if (top == -1) {
-        printf("Stack is empty\n");
-        return;
-    }
-    printf("The elements in stack are: \n");
-    for (int i = top; i >= 0; i--) {
-        printf("%d\n", stack[i]);
-    }
-}
-
-void showstatus() {
-    if (top == -1) {
-        printf("Stack Underflow\n");
-    } else if (top == capacity - 1) {
+    if(isFull()) {
         printf("Stack overflow\n");
     } else {
-        printf("Stack is stored correctly in memory");
+        stack[++top] = item;
     }
 }
 
+int pop() {
+   if(isEmpty()) {
+    printf("Stack Underflow\n");
+   } else {
+    return stack[top--];
+   }
+}
 
-void main() {
-    int choice = 1;
-    while(choice) {
-        printf("\nEnter your choice\n 1.Push\n 2.Pop\n 3.Display\n 4 Show status\n 5 Exit\n");
-        scanf("%d", &choice);
+void display() {
+    printf("Elements in the stack are: \n");
+
+    int i = 0;
+    while (i <= top) {
+        printf("%d\n",stack[i]);
+        i++;
+    }
+}
+
+int main() {
+    int choice, stackItem;
+     while(1) {
+        printf("Stack Operation \n");
+        printf("Enter `1` for  Push Operation \n");
+        printf("Enter `2` for  Pop Operation \n");
+        printf("Enter `3` for  Traverse Operation \n");
+        printf("Enter `4` for  Quit Operation \n");
+        printf("Enter your choice : ");
+        scanf("%d",&choice);
+        
         switch(choice) {
-            case 1: push();
+            case 1:
+                    push();
                     break;
-            case 2: pop();
+            case 2:
+                    stackItem = pop();
+                    if(stackItem == 0) {
+                        printf("Your stack is underflow");
+                    } else {
+                        printf("Last popped item : %d\n", stackItem);
+                    }
                     break;
-            case 3: display();
+            case 3:
+                    display();
                     break;
-            case 4: showstatus();
+            case 4:
+                    exit(0);
                     break;
-            case 5: exit(0);
+
+            default: printf("Please enter correct choice : ");
         }
     }
+    return 0;    
 }
