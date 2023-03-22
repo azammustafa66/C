@@ -175,10 +175,9 @@ void *search(struct node *ptr)
     scanf("%d", &key);
 
     while (ptr != NULL) {
-        if (key == ptr->data) {
-            printf("element found at %d", ptr);
-            ptr = ptr->next;
-        }
+        if (key == ptr->data)
+            printf("element found at location %d", &ptr);
+        ptr = ptr->next;
     }
 }
 
