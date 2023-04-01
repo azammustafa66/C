@@ -1,11 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define max 5
+#define max 100
 
 int stack[max], top = -1;
 
 int isFull() {
-    if (top == max - 1) {
+    if (top > -1) {
         return 1;
     } else {
         return 0;
@@ -20,12 +20,8 @@ int isEmpty() {
     }
 }
 
-void push() {
-    printf("Enter a value to push: ");
-    int item;
-    scanf("%d",&item);
-
-    if(isFull()) {
+void push(int item) {
+    if (top == max - 1) {
         printf("Stack overflow\n");
     } else {
         stack[++top] = item;
@@ -33,20 +29,18 @@ void push() {
 }
 
 int pop() {
-   if(isEmpty()) {
-    printf("Stack Underflow\n");
-   } else {
-    return stack[top--];
-   }
+    int item = stack[top];
+    --top;
+    return item;
 }
 
 void display() {
-    printf("Elements in the stack are: \n");
-
-    int i = 0;
-    while (i <= top) {
-        printf("%d\n",stack[i]);
-        i++;
+    if (top == -1)
+        printf("Stack is empty\n");
+    else {
+        for(int i = top; i >= 0; i--) {
+            printf("%d\n",stack[i]);
+        }
     }
 }
 
@@ -63,15 +57,13 @@ int main() {
         
         switch(choice) {
             case 1:
-                    push();
+                    printf("Enter item to be pushed: "); int item;
+                    scanf("%d",&item);
+                    push(item);
                     break;
             case 2:
                     stackItem = pop();
-                    if(stackItem == 0) {
-                        printf("Your stack is underflow");
-                    } else {
-                        printf("Last popped item : %d\n", stackItem);
-                    }
+                    printf("Last popped item : %d\n", stackItem);
                     break;
             case 3:
                     display();
@@ -79,8 +71,6 @@ int main() {
             case 4:
                     exit(0);
                     break;
-
-            default: printf("Please enter correct choice : ");
         }
     }
     return 0;    
