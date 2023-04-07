@@ -5,19 +5,17 @@
 int stack[max], top = -1;
 
 int isFull() {
-    if (top > -1) {
+    if (top > -1)
         return 1;
-    } else {
-        return 0;
-    }
+
+    return 0;
 }
 
 int isEmpty() {
-    if (top == -1) {
+    if (top == -1)
         return 1;
-    } else {
-        return 0;
-    }
+
+    return 0;
 }
 
 void push(int item) {
