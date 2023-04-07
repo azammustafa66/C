@@ -1,75 +1,57 @@
 #include<stdio.h>
-#include<stdlib.h>
-#define max 100
+#include<stdbool.h>
+#define size 5
 
-int stack[max], top = -1;
+int stack[size], top = -1;
 
-int isFull() {
-    if (top > -1)
-        return 1;
-
-    return 0;
+bool isFull() {
+    if (top == size - 1)
+        return true;
+    
+    return false;
 }
 
-int isEmpty() {
+bool isEmpty() {
     if (top == -1)
-        return 1;
-
-    return 0;
+        return true;
+    
+    return false;
 }
 
 void push(int item) {
-    if (top == max - 1) {
-        printf("Stack overflow\n");
-    } else {
+    if (isFull())
+        printf("Stack is full\n");
+    else {
         stack[++top] = item;
     }
 }
 
-int pop() {
-    int item = stack[top];
-    --top;
-    return item;
+void pop() {
+    if (isEmpty())
+        printf("Stack is empty\n");
+    else
+        printf("Element popped is %d\n", stack[top]);
+        top--;
 }
 
 void display() {
     if (top == -1)
         printf("Stack is empty\n");
     else {
-        for(int i = top; i >= 0; i--) {
-            printf("%d\n",stack[i]);
-        }
+        for (int i = top; i >= 0; i--)
+            printf("%d\n", stack[i]);
     }
 }
 
 int main() {
-    int choice, stackItem;
-     while(1) {
-        printf("Stack Operation \n");
-        printf("Enter `1` for  Push Operation \n");
-        printf("Enter `2` for  Pop Operation \n");
-        printf("Enter `3` for  Traverse Operation \n");
-        printf("Enter `4` for  Quit Operation \n");
-        printf("Enter your choice : ");
-        scanf("%d",&choice);
-        
-        switch(choice) {
-            case 1:
-                    printf("Enter item to be pushed: "); int item;
-                    scanf("%d",&item);
-                    push(item);
-                    break;
-            case 2:
-                    stackItem = pop();
-                    printf("Last popped item : %d\n", stackItem);
-                    break;
-            case 3:
-                    display();
-                    break;
-            case 4:
-                    exit(0);
-                    break;
-        }
-    }
-    return 0;    
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+
+    display();
+
+    pop();
+    display();
 }
