@@ -1,40 +1,53 @@
 #include<stdio.h>
-#include<math.h>
-#include<ctype.h>
-#include<string.h>
-#define max 20
+#define size 5
 
-float compute(char symbol, float op1, float op2) {
-    switch (symbol) {
-        case '+': return op1 + op2;
-        case '-': return op1 - op2;
-        case '*': return op1 * op2;
-        case '/': return op1 / op2;
-        case '^': return pow(op1, op2);
+int q[size], front = -1, rear = -1;
+
+
+void EnQueue(int item) {
+    if (rear == size - 1)
+        printf("Queue is full\n");
+    else {
+        if (front == -1)
+            front = 0;
+        rear++;
+        q[rear] = item;
     }
 }
 
-void main() {
-    float s[20], res, op1, op2;
-    int top;
-    char postfix[20], symbol;
-
-    printf("Enter postfix expression: ");
-    scanf("%s", postfix);
-    top = -1;
-
-    for (int i = 0; i < strlen(postfix); i++) {
-        symbol = postfix[i];
-
-        if (isdigit(symbol)) {
-            s[++top] = symbol - '0';
-        } else {
-            op2 = s[top--];
-            op1 = s[top--];
-            res = compute(symbol, op1, op2);
-            s[++top] = res;
-        }
+void deQueue() {
+    if (front = -1)
+        printf("Queue is empty\n");
+    else {
+        front++;
+        if (front > rear)
+            front = rear = -1;
     }
-    res= s[top--];
-    printf("%d",res);
+}
+
+void display() {
+    if (rear == -1) 
+        printf("Queue is empty\n");
+    for (int i = front; i <= rear; i++)
+        printf("%d\n", q[i]);
+}
+
+int main() {
+    deQueue();
+    display();
+
+    EnQueue(1);
+    EnQueue(2);
+    EnQueue(3);
+    EnQueue(4);    
+    EnQueue(5);
+
+    // EnQueue(6);
+
+    display();
+
+    deQueue();
+    // deQueue();
+
+    display();    
 }

@@ -30,11 +30,10 @@ void enQueue(int item) {
 }
 
 void deQueue() {
-    int element;
     if (isEmpty())
         printf("Queue is empty\n");
     else if (front == rear) {
-            front = rear = -1;
+        front = rear = -1;
     } else {
         front = (front + 1) % size;
     }
