@@ -15,6 +15,8 @@ void del_begi();
 void del_end();
 void insert_pos(int, int);
 void del_pos(int);
+int count_nodes();
+void reverse();
 
 int main() {
     create(1);
@@ -40,6 +42,11 @@ int main() {
     display();
 
     del_pos(2);
+    display();
+
+    printf("\n%d", count_nodes());
+
+    reverse();
     display();
 }
 
@@ -131,13 +138,38 @@ void del_pos(int pos) {
     }
 
     struct node *temp = head;
-    struct node *del = NULL;
+    struct node *ptr = NULL;
 
     for (int i = 1; i < pos - 1; i++) {
         temp = temp->next;
     }
-    del = temp->next;
+    ptr = temp->next;
     temp->next = temp->next->next;
-    del->next = NULL;
-    free(del);
+    ptr->next = NULL;
+    free(ptr);
+}
+
+int count_nodes() {
+    struct node *ptr = head;
+    int i = 0;
+
+    while (ptr != NULL) {
+        ptr = ptr->next;
+        ++i;
+    }
+    return i;
+}
+
+void reverse() {
+    struct node *prev = NULL;
+    struct node *cur = head;
+    struct node *next;
+
+    while (cur != NULL) {
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+    head = prev;
 }
